@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Encrypt by DEBB</title>
+    <style>
+        body {
+            background: #0d0d0d;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 30px;
+        }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        textarea {
+            width: 90%;
+            height: 150px;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+            font-size: 15px;
+            resize: none;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 22px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+            background: #00aaff;
+            color: white;
+        }
+        .box {
+            margin-top: 20px;
+        }
+        #output {
+            width: 90%;
+            height: 150px;
+            background: #1a1a1a;
+            padding: 10px;
+            border-radius: 8px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>WELCOME✌ TO ENCRYPT BY DEBB!</h1>
+
+    <textarea id="input" placeholder="PASTE HTML ANDA"></textarea><br>
+    <button onclick="encryptHTML()">KIRIM</button>
+
+    <div class="box">
+        <h3>HASIL HTML ANDA</h3>
+        <div id="output"></div>
+
+        <button onclick="downloadFile()">DOWNLOAD</button>
+        <button onclick="copyOutput()">COPY</button>
+    </div>
+
+    <script>
+        // encrypt sederhana base64 biar hasilnya acak
+        function encryptHTML() {
+            let text = document.getElementById("input").value;
+            if (text.trim() === "") {
+                alert("Tolong isi dulu HTML-nya!");
+                return;
+            }
+            let encrypted = btoa(text);
+            document.getElementById("output").innerText = encrypted;
+        }
+
+        function copyOutput() {
+            let text = document.getElementById("output").innerText;
+            navigator.clipboard.writeText(text);
+            alert("Berhasil dicopy!");
+        }
+
+        function downloadFile() {
+            let content = document.getElementById("output").innerText;
+            let blob = new Blob([content], { type: "text/plain" });
+            let link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "encrypted.txt";
+            link.click();
+        }
+    </script>
+
+</body>
+</html>
